@@ -9,7 +9,7 @@ import { NavBar } from './components/nav-bar/nav-bar';
 import { ConferenceList } from './components/conference-list/conference-list';
 @Component({
   selector: 'app-root',
-  imports: [Header, Footer, UserProfile, Notifications, FriendsList,NavBar, ConferenceList ],
+  imports: [RouterOutlet,Header, Footer, NavBar],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
