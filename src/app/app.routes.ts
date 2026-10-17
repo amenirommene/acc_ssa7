@@ -5,15 +5,23 @@ import { FriendsList } from './components/friends-list/friends-list';
 import { ConferenceList } from './components/conference-list/conference-list';
 import { Home } from './components/home/home';
 import { Inscription } from './components/inscription/inscription';
+import { Admin } from './admin/admin/admin';
+import { Dashboard } from './admin/dashboard/dashboard';
+import { Users } from './admin/users/users';
+import { Speakers } from './admin/speakers/speakers';
+import { ConferenceForm } from './admin/conference-form/conference-form';
 
 export const routes: Routes = [
     {path:"", redirectTo:"home", pathMatch:"full"},
-    {path:"profile", component:UserProfile},
-    {path:"notifications", component:Notifications},
+     {path:"home", component:Home},
+    {path:"profile", loadComponent : () => import('./components/user-profile/user-profile').then(x=>x.UserProfile)},
+    {path:"notifications", loadComponent : () => import('./components/notifications/notifications').then(x=>x.Notifications)},
     {path:"friends", component:FriendsList},
     {path:"conferences", component:ConferenceList},
-    {path:"home", component:Home},
     {path:"inscription/:id",component: Inscription },
-   // {path:"**", redirectTo:"home", pathMatch:"full"},
+    
+    {path: "admin", component:Admin, loadChildren : () => import ('./admin/admin.routes').then(m=>m.ADMIN_ROUTES)},
+    //la route contenant "**" doit être toujours à la fin
+    {path:"**", redirectTo:"home", pathMatch:"full"}
 
 ];
