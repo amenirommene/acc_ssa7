@@ -1,9 +1,17 @@
 
-<form class="event-form" [formGroup]="myForm">
-    <div class="form-group">
+<form [formGroup]="myForm">
+    <div>
         <label for="title">Titre :</label>
-        <input id="title" formControlName="title"  class="form-control">
+        <input id="title" formControlName="title">
+      @if(myForm.get('title')?.errors?.['required'] && myForm.get('title')?.touched ){
+        <div>Champ obligatoire</div>
+      }
        
+        @if(myForm.get('title')?.hasError('minlength') && myForm.get('title')?.touched ){
+        <div>minimum {{myForm.get('title')?.errors?.['minlength']?.requiredLength }}  caractères
+            alors que tu as écris {{myForm.get('title')?.errors?.['minlength']?.actualLength }}
+        </div>
+      }
         </div>
     
     <div class="form-group">
@@ -26,4 +34,8 @@
         <label for="nbMax">Nombre maximal de participants :</label>
         <input id="nbMax" type="number" formControlName="nbmax"  class="form-control">
     </div>
+    <button type="submit" [disabled]="myForm.invalid">Ajouter</button>
+    <button type="submit" [disabled]="formStatus() == 'INVALID'">Ajouter</button>
 </form>
+
+{{formStatus()}}

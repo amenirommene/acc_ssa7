@@ -4,6 +4,7 @@ import {UpperCasePipe, DatePipe, NgClass} from '@angular/common';
 import { ConferenceDetails } from '../conference-details/conference-details';
 import { ConferenceService } from '../../services/conference-service';
 import { RouterLink } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
 @Component({
   selector: 'app-conference-list',
   imports: [UpperCasePipe, DatePipe, NgClass, ConferenceDetails, RouterLink],
@@ -21,7 +22,7 @@ export class ConferenceList {
   }
  today = new Date().toISOString().split('T')[0];
  confS=inject(ConferenceService);
- conferences =signal<Conference[]>(this.confS.getAllConferences());
+ conferences = toSignal(this.confS.getAllConferences());
 couleurBouton(conference: Conference) {
     if (conference.maxParticipants - conference.nbParticipants > 20) {
       return 'vert';
