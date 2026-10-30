@@ -22,7 +22,7 @@ export class ConferenceList {
   }
  today = new Date().toISOString().split('T')[0];
  confS=inject(ConferenceService);
- conferences = toSignal(this.confS.getAllConferences());
+ conferences = toSignal(this.confS.getAllConferences(),{initialValue:[]});
 couleurBouton(conference: Conference) {
     if (conference.maxParticipants - conference.nbParticipants > 20) {
       return 'vert';

@@ -1,5 +1,5 @@
 
-<form [formGroup]="myForm">
+<form [formGroup]="myForm" (ngSubmit)="OnSubmit()">
     <div>
         <label for="title">Titre :</label>
         <input id="title" formControlName="title">

@@ -12,9 +12,11 @@ export class ConferenceService {
   private http = inject(HttpClient);
   private readonly apiUrl="http://localhost:3000/conferences";
 getAllConferences():Observable<Conference[]>{
-  console.log(this.list);
   return this.http.get<Conference[]>(this.apiUrl);
 }
-list : Conference[]=[];
+addConference(c:Conference):Observable<Conference>{
+  return this.http.post<Conference>(this.apiUrl,c);
+}
+
 
 }
